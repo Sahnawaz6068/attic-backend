@@ -1,4 +1,3 @@
-
 import mongoose from "mongoose";
 
 const productSchema = new mongoose.Schema(
@@ -42,16 +41,12 @@ const productSchema = new mongoose.Schema(
       required: true,
     },
 
-    roomType: [{
-      type: String,
-      enum: [
-        "living-room",
-        "bedroom",
-        "dining-room",
-        "office",
-        "outdoor",
-      ],
-    }],
+    roomType: [
+      {
+        type: String,
+        enum: ["living-room", "bedroom", "dining-room", "office", "outdoor"],
+      },
+    ],
 
     // Product material
     woodType: {
@@ -99,36 +94,123 @@ const productSchema = new mongoose.Schema(
     },
 
     // Product images
-    images: [{
-      url: {
-        type: String,
-        required: true,
+    images: [
+      {
+        url: {
+          type: String,
+          required: true,
+        },
+        publicId: String,
+        alt: String,
+        isPrimary: {
+          type: Boolean,
+          default: false,
+        },
       },
-      publicId: String,
-      alt: String,
-      isPrimary: {
-        type: Boolean,
-        default: false,
-      },
-    }],
+    ],
 
     // 360 degree product images
-    images360: [{
-      url: String,
-      publicId: String,
-    }],
+    images360: [
+      {
+        url: String,
+        publicId: String,
+      },
+    ],
 
+    // Customization
     // Customization
     customizationEnabled: {
       type: Boolean,
       default: false,
     },
 
+    customizationOptions: {
+      dimensions: {
+        width: {
+          min: {
+            type: Number,
+            min: 1,
+          },
+          max: {
+            type: Number,
+            min: 1,
+          },
+        },
+
+        height: {
+          min: {
+            type: Number,
+            min: 1,
+          },
+          max: {
+            type: Number,
+            min: 1,
+          },
+        },
+
+        depth: {
+          min: {
+            type: Number,
+            min: 1,
+          },
+          max: {
+            type: Number,
+            min: 1,
+          },
+        },
+      },
+
+      woodTypes: [
+        {
+          value: {
+            type: String,
+            enum: ["sheesham", "mango", "other"],
+            required: true,
+          },
+          additionalPrice: {
+            type: Number,
+            default: 0,
+            min: 0,
+          },
+        },
+      ],
+
+      woodFinishes: [
+        {
+          value: {
+            type: String,
+            required: true,
+          },
+          additionalPrice: {
+            type: Number,
+            default: 0,
+            min: 0,
+          },
+        },
+      ],
+
+      metalFinishes: [
+        {
+          value: {
+            type: String,
+            required: true,
+          },
+          additionalPrice: {
+            type: Number,
+            default: 0,
+            min: 0,
+          },
+        },
+      ],
+    },
+
     // Additional product information
-    specifications: [{
-      key: String,
-      value: String,
-    }],
+    specifications: [
+      {
+        key: String,
+        value: String,
+      },
+    ],
 
     features: [String],
 
@@ -168,7 +250,7 @@ const productSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
-  }
+  },
 );
 
 // Indexes for product filtering
