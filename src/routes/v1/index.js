@@ -5,6 +5,7 @@ import product from './product.routes.js'
 import cart from './cart.routes.js'
 import customization from './productCustomization.routes.js'
 import aiRoutes from './ai.routes.js'
+import checkoutRoutes from './checkout.routes.js'
 
 const router = express.Router();
 
@@ -14,5 +15,6 @@ router.use('/products',product);
 router.use('/carts',cart);
 router.use('/custom',customization);
 router.use("/ai", aiRoutes);
+router.use("/checkout", checkoutRoutes);
 
 export default router;
