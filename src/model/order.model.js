@@ -1,4 +1,3 @@
-
 import mongoose from "mongoose";
 
 const { Schema } = mongoose;
@@ -54,7 +53,7 @@ const shippingAddressSchema = new Schema(
       default: "India",
     },
   },
-  { _id: false }
+  { _id: false },
 );
 
 const orderItemSchema = new Schema(
@@ -104,7 +103,7 @@ const orderItemSchema = new Schema(
       min: 0,
     },
   },
-  { _id: false }
+  { _id: false },
 );
 
 const pricingSchema = new Schema(
@@ -135,7 +134,7 @@ const pricingSchema = new Schema(
       min: 0,
     },
   },
-  { _id: false }
+  { _id: false },
 );
 
 const orderSchema = new Schema(
@@ -181,28 +180,31 @@ const orderSchema = new Schema(
     },
     paymentStatus: {
       type: String,
-      enum: [
-        "pending",
-        "paid",
-        "failed",
-        "partially_paid",
-        "refunded",
-      ],
+      enum: ["pending", "paid", "failed", "partially_paid", "refunded"],
       default: "pending",
     },
+
     paymentMethod: {
       type: String,
       enum: ["razorpay", "cod", "upi", "card", "other"],
     },
+
     paymentId: {
       type: String,
+    },
+
+    razorpayOrderId: {
+      type: String,
+      unique: true,
+      sparse: true,
+      index: true,
     },
     notes: {
       type: String,
       trim: true,
     },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 orderSchema.index({ userId: 1, createdAt: -1 });

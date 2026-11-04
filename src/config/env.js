@@ -28,7 +28,9 @@ const config = {
   smtpPort: Number(process.env.SMTP_PORT),
   smtpUser: process.env.SMTP_USER,
   smtpPassword: process.env.SMTP_PASSWORD,
-  jwtAccessSecret: process.env.JWT_SECRET
+  jwtAccessSecret: process.env.JWT_SECRET,
+  razorpayKeyId: process.env.RAZORPAY_KEY_ID,
+  razorpayKeySecret: process.env.RAZORPAY_KEY_SECRET,
 };
 
 export default config;
